@@ -33,6 +33,8 @@ jobs:
         draft: false
         prerelease: false
         release_name: ${{ steps.version.outputs.version }}
+        tag_name: ${{ steps.version.outputs.version }}
+        body: ${{ steps.version.outputs.version }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: zip release
