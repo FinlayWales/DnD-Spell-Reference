@@ -26,17 +26,6 @@ jobs:
     - name: version
       run: echo "::set-output name=version::$(type version.txt)"
       id: version
-    - name: release
-      uses: actions/create-release@v1
-      id: create_release
-      with:
-        draft: false
-        prerelease: false
-        release_name: ${{ steps.version.outputs.version }}
-        tag_name: ${{ steps.version.outputs.version }}
-        body: ${{ steps.version.outputs.version }}
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
     - name: zip release
       uses: thedoctor0/zip-release@0.7.1
       with:
@@ -48,3 +37,8 @@ jobs:
       with:
         artifacts: "release.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
+        name: ${{ steps.version.outputs.version }}
+        tag: ${{ steps.version.outputs.version }}
+        body: ${{ steps.version.outputs.version }}
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
