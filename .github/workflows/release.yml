@@ -22,6 +22,7 @@ jobs:
         pip install PyInstaller
         pip install Eel
         python -m eel spells.py frontend --onefile --noconsole
+        Xcopy /E /I json dist\json
     - name: version
       run: echo "::set-output name=version::$(type version.txt)"
       id: version
@@ -32,15 +33,16 @@ jobs:
         draft: false
         prerelease: false
         release_name: ${{ steps.version.outputs.version }}
-        tag_name: ${{ github.ref }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
-    - name: upload windows artifact
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+    - name: zip release
+      uses: thedoctor0/zip-release@0.7.1
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/spells.exe
-        asset_name: spells.exe
-        asset_content_type: application/exe
+        type: 'zip'
+        filename: 'release.zip'
+        path: ./dist/*
+    - name: Upload Release
+      uses: ncipollo/release-action@v1.12.0
+      with:
+        artifacts: "release.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
