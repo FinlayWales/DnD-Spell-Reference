@@ -5,37 +5,35 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
-
     steps:
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-    - name: Build Application
-      run: |
-        python -m eel spells.py frontend --onefile --noconsole
-    - name: version
-      run: type version.txt
-      id: version
-    - name: release
-      uses: actions/create-release@v1
-      id: create_release
-      with:
-        draft: false
-        prerelease: false
-        release_name: ${{ steps.version.outputs.version }}
-        tag_name: ${{ github.ref }}
-        body_path: CHANGELOG.md
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-    - name: upload windows artifact
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/spells.exe
-        asset_name: spells.exe
-        asset_content_type: application/exe
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Build Application
+        run: |
+          python -m eel spells.py frontend --onefile --noconsole
+      - name: version
+        run: type version.txt
+        id: version
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.version.outputs.version }}
+          tag_name: ${{ github.ref }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: upload windows artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/spells.exe
+          asset_name: spells.exe
+          asset_content_type: application/exe
