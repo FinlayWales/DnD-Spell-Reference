@@ -23,7 +23,7 @@ jobs:
         pip install Eel
         python -m eel spells.py frontend --onefile --noconsole
     - name: version
-      run: type version.txt
+      run: echo "::set-output name=version::$(type version.txt)"
       id: version
     - name: release
       uses: actions/create-release@v1
