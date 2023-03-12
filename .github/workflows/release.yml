@@ -3,8 +3,9 @@ name: Create Release
 on:
   workflow_dispatch:
 
-permissions:
-  contents: read
+permissions: 
+  write-all
+  read-all
 
 jobs:
   build:
