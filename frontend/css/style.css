@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Cardo');
+
+html {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    background: #ccc;
+}
+
+body {
+    border: 0px;
+    padding: 20px;
+    margin: 20px;
+    width: calc(100vw - 100px);
+    min-height: calc(100vh - 100px);
+    background: #fff;
+    -moz-box-shadow: 5px 5px 1px #999;
+    -webkit-box-shadow: 5px 5px 1px #999;
+    box-shadow: 5px 5px 1px #999;
+    overflow-y: scroll;
+    background-image: url("bg.png");
+}
+
+body, input {
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: 'Cardo', serif;
+    font-variant-caps: small-caps;
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#search, #search:focus {
+    color: #58180D;
+    background: #e7d8ca;
+    border-radius: 0px;
+    border: 0px;
+    outline-width: 0;
+    border-bottom: 3px solid black;
+}
+
+#suggestions {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+#suggestions > li {
+    background: #e8dfd6;
+    border-top: 1px solid black;
+    transition: 0.3s;
+}
+
+#suggestions > li:last-of-type {
+    border-bottom: 3px solid black;
+}
+
+#suggestions > li:hover {
+    background: #D4C8BD;
+}
+
+#suggestions > li, #search {
+    padding: 5px;
+}
+
+#spell_info {
+    overflow: hidden;
+    transition: height .5s ease-out;
+    height: auto;
+    background-color: #e7d8ca;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #58180D;
+}

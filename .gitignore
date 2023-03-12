@@ -1,0 +1,4 @@
+build.bat
+dist/*
+build/*
+spells.spec
